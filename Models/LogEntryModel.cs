@@ -1,4 +1,4 @@
-﻿namespace MyToolBox.Integration.LogWebViewer.Models
+﻿namespace WebLogViewer.Models
 {
     public class LogEntryModel
     {

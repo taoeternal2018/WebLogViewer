@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace MyToolBox.Integration.LogWebViewer
+namespace WebLogViewer
 {
     public class CommonLogHelper
     {

@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 
-namespace MyToolBox.Integration.LogWebViewer.Models
+namespace WebLogViewer.Models
 {
     [DataContract]
     public class LogFileModel

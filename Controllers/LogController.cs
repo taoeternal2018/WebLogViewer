@@ -1,4 +1,4 @@
-﻿using MyToolBox.Integration.LogWebViewer.Models;
+﻿using WebLogViewer.Models;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -6,7 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace MyToolBox.Integration.LogWebViewer.Controllers
+namespace WebLogViewer.Controllers
 {
     public class LogController : ApiController
     {

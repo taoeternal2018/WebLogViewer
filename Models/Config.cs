@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
 
-namespace MyToolBox.Integration.LogWebViewer.Models
+namespace WebLogViewer.Models
 {
 
     public sealed class Config : ConfigurationSection

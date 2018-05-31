@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace MyToolBox.Integration.LogWebViewer.Models
+namespace WebLogViewer.Models
 {
     public class PagedFileReader
     {
