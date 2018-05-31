@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Toolbox Job Logs</title>
+    <link href="/Styles/main.css" rel="stylesheet" />
+    <link href="/Styles/jquery-ui-themes-1.12.1/jquery-ui.css" rel="stylesheet">
+    <link href="/Styles/Font-Awesome-4.0.3/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/Styles/bootstrap.min-3.3.7.css" rel="stylesheet">
+    <script src="/Scripts/moment.min-2.18.1.js"></script>
+    <script src="/Scripts/jquery-1.12.4.js"></script>
+    <script src="/Scripts/jquery-ui-1.12.1.js"></script>
+    <script src="/Scripts/knockout-min-3.2.0.js"></script>
+    <script src="/Scripts/log.js"></script>
+    <script src="/Scripts/kodatagrid.js"></script>
+    <script src="/Scripts/bootstrap.min-3.3.7.js"></script>
+    <script src="/Scripts/loading.js"></script>
+</head>
+<body>
+    <div class="container" id="log-view">
+        <div class="row">
+            <h1>My Toolbox Job Log Viewer</h1>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-3 col-sm-4 col-xs-12" style="margin-bottom: 10px;">
+                <div class="input-group">
+                    <input type="text" style="min-width:120px" size="16" readonly id="logdatepicker" data-bind="datepicker: selectedDate, datepickerOptions: { dateFormat:'yy-mm-dd', maxDate: new Date() }" class="form-control" placeholder="Search for..." aria-label="Search for...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" data-bind="click: updateLogs">Refresh</button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-12" style="margin-bottom: 10px;">
+                <div class="input-group">
+                    <span class="input-group-addon">Jobs</span>
+                    <span class="form-control">
+                        <select id="selectedJob" data-bind="options:selectJobs,
+                            optionsText:'text',
+                            optionsValue:'value'"></select>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="pagePlaceholder">
+            </div>
+        </div>
+        <div class="row">
+            <div id="logDataGrid" data-bind='dataGrid: gridViewModel'></div>
+            <div data-bind="if:needAdditionalInfo"><div id="additionalInfo" data-bind="text:additionalInfo"></div></div>
+        </div>
+        <div class="row">
+            <div class="pagePlaceholder">
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(".pagePlaceholder").html(
+            '<div class="pagerWrap" data-bind="if:needPager">\
+                        <ul class="grdLinePager">\
+                            <li class="liBgFirst"><a href="#" data-bind="click:gridViewModel.first"><<</a></li>\
+                            <li class="liBgPrev"><a href="#" data-bind="click:gridViewModel.previous"><</a></li>\
+                            <li class="liBgCur">\
+                                <input data-bind="value:gridViewModel.currentPageIndex,event:{blur:gridViewModel.refresh,keypress:gridViewModel.keyPress}" type="text" />\
+                                <span>/</span>\
+                                <span data-bind="text:gridViewModel.maxPageIndex" type="text"></span>\
+                            </li>\
+                            <li class="liBGNext"><a href="#" data-bind="click: gridViewModel.next">></a></li>\
+                            <li class="liBGLast"><a href="#" data-bind="click:gridViewModel.last">>></a></li>\
+                        </ul>\
+                    </div>');
+        $(document).ready(function () {
+            var viewModel = new ToyotaConnect.Nlog.LogViewModel();
+            ko.applyBindings(viewModel);
+            $("#logdatepicker").datepicker();
+            viewModel.getJobsInfo();
+            $("#selectedJob").change(function () {
+                viewModel.updateLogs();
+            });
+        });
+    </script>
+</body>
+
+</html>
